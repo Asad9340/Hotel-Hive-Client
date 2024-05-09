@@ -8,7 +8,7 @@ function Root() {
     <div>
       <NavBar />
       <div className="max-w-6xl mx-auto">
-        <div className="mx-3 md:mx-0">
+        <div className="mx-2 md:mx-0">
           <Outlet />
         </div>
       </div>

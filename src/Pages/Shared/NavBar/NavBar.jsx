@@ -45,7 +45,7 @@ function NavBar() {
     navigate('/');
   };
   const navList = (
-    <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+    <ul className="mt-2 mb-4 flex flex-col gap-2 md:gap-3 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
       <Typography
         as="li"
         variant="small"
@@ -61,6 +61,91 @@ function NavBar() {
           }
         >
           Home
+        </NavLink>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-normal"
+      >
+        <NavLink
+          to="/rooms"
+          className={({ isActive }) =>
+            isActive
+              ? 'flex items-center  px-3 py-2 bg-orange-700 text-white rounded-md duration-300 font-semibold  font-fontPrimary'
+              : 'flex items-center font-display text-black px-3 py-2 font-fontPrimary'
+          }
+        >
+          Rooms
+        </NavLink>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-normal"
+      >
+        <NavLink
+          to="/my-bookings"
+          className={({ isActive }) =>
+            isActive
+              ? 'flex items-center  px-3 py-2 bg-orange-700 text-white rounded-md duration-300 font-semibold  font-fontPrimary'
+              : 'flex items-center font-display text-black px-3 py-2 font-fontPrimary'
+          }
+        >
+          My Bookings
+        </NavLink>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-normal"
+      >
+        <NavLink
+          to="/about-us"
+          className={({ isActive }) =>
+            isActive
+              ? 'flex items-center  px-3 py-2 bg-orange-700 text-white rounded-md duration-300 font-semibold  font-fontPrimary'
+              : 'flex items-center font-display text-black px-3 py-2 font-fontPrimary'
+          }
+        >
+          About Us
+        </NavLink>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-normal"
+      >
+        <NavLink
+          to="/contact-us"
+          className={({ isActive }) =>
+            isActive
+              ? 'flex items-center  px-3 py-2 bg-orange-700 text-white rounded-md duration-300 font-semibold  font-fontPrimary'
+              : 'flex items-center font-display text-black px-3 py-2 font-fontPrimary'
+          }
+        >
+          Contact Us
+        </NavLink>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-normal"
+      >
+        <NavLink
+          to="/my-bookings"
+          className={({ isActive }) =>
+            isActive
+              ? 'flex items-center  px-3 py-2 bg-orange-700 text-white rounded-md duration-300 font-semibold  font-fontPrimary'
+              : 'flex items-center font-display text-black px-3 py-2 font-fontPrimary'
+          }
+        >
+          My Bookings
         </NavLink>
       </Typography>
       <Typography>

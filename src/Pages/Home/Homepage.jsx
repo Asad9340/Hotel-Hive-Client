@@ -1,8 +1,9 @@
+import Banner from "../../components/Banner/Banner";
 
 function Homepage() {
   return (
-    <div>
-<h1>hello</h1>
+    <div className="mt-5">
+      <Banner/>
     </div>
   );
 }
