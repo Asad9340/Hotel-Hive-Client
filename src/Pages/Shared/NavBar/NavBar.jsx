@@ -131,23 +131,6 @@ function NavBar() {
           Contact Us
         </NavLink>
       </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <NavLink
-          to="/my-bookings"
-          className={({ isActive }) =>
-            isActive
-              ? 'flex items-center  px-3 py-2 bg-orange-700 text-white rounded-md duration-300 font-semibold  font-lato'
-              : 'flex items-center font-display text-black px-3 py-2 font-lato'
-          }
-        >
-          My Bookings
-        </NavLink>
-      </Typography>
       <Typography>
         <label className="swap swap-rotate">
           <input
