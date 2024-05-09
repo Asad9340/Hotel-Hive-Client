@@ -7,6 +7,7 @@ import Error from './../Pages/Error/Error';
 import Rooms from '../Pages/Rooms/Rooms';
 import MyBookings from '../Pages/MyBookings/MyBookings';
 import AboutUs from '../components/AboutUs/AboutUs';
+import ContactUs from '../components/ContactUs/ContactUs';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -31,11 +32,15 @@ const router = createBrowserRouter([
       },
       {
         path: '/my-bookings',
-        element: <MyBookings/>
+        element: <MyBookings />,
       },
       {
         path: '/about-us',
-        element: <AboutUs/>
+        element: <AboutUs />,
+      },
+      {
+        path: '/contact-us',
+        element: <ContactUs />,
       },
     ],
   },
