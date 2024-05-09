@@ -56,8 +56,8 @@ function NavBar() {
           to="/"
           className={({ isActive }) =>
             isActive
-              ? 'flex items-center  px-3 py-2 bg-orange-700 text-white rounded-md duration-300 font-semibold  font-fontPrimary'
-              : 'flex items-center font-display text-black px-3 py-2 font-fontPrimary'
+              ? 'flex items-center  px-3 py-2 bg-orange-700 text-white rounded-md duration-300 font-semibold  font-lato'
+              : 'flex items-center font-display text-black px-3 py-2 font-lato'
           }
         >
           Home
@@ -73,8 +73,8 @@ function NavBar() {
           to="/rooms"
           className={({ isActive }) =>
             isActive
-              ? 'flex items-center  px-3 py-2 bg-orange-700 text-white rounded-md duration-300 font-semibold  font-fontPrimary'
-              : 'flex items-center font-display text-black px-3 py-2 font-fontPrimary'
+              ? 'flex items-center  px-3 py-2 bg-orange-700 text-white rounded-md duration-300 font-semibold  font-lato'
+              : 'flex items-center font-display text-black px-3 py-2 font-lato'
           }
         >
           Rooms
@@ -90,8 +90,8 @@ function NavBar() {
           to="/my-bookings"
           className={({ isActive }) =>
             isActive
-              ? 'flex items-center  px-3 py-2 bg-orange-700 text-white rounded-md duration-300 font-semibold  font-fontPrimary'
-              : 'flex items-center font-display text-black px-3 py-2 font-fontPrimary'
+              ? 'flex items-center  px-3 py-2 bg-orange-700 text-white rounded-md duration-300 font-semibold  font-lato'
+              : 'flex items-center font-display text-black px-3 py-2 font-lato'
           }
         >
           My Bookings
@@ -107,8 +107,8 @@ function NavBar() {
           to="/about-us"
           className={({ isActive }) =>
             isActive
-              ? 'flex items-center  px-3 py-2 bg-orange-700 text-white rounded-md duration-300 font-semibold  font-fontPrimary'
-              : 'flex items-center font-display text-black px-3 py-2 font-fontPrimary'
+              ? 'flex items-center  px-3 py-2 bg-orange-700 text-white rounded-md duration-300 font-semibold  font-lato'
+              : 'flex items-center font-display text-black px-3 py-2 font-lato'
           }
         >
           About Us
@@ -124,8 +124,8 @@ function NavBar() {
           to="/contact-us"
           className={({ isActive }) =>
             isActive
-              ? 'flex items-center  px-3 py-2 bg-orange-700 text-white rounded-md duration-300 font-semibold  font-fontPrimary'
-              : 'flex items-center font-display text-black px-3 py-2 font-fontPrimary'
+              ? 'flex items-center  px-3 py-2 bg-orange-700 text-white rounded-md duration-300 font-semibold  font-lato'
+              : 'flex items-center font-display text-black px-3 py-2 font-lato'
           }
         >
           Contact Us
@@ -141,8 +141,8 @@ function NavBar() {
           to="/my-bookings"
           className={({ isActive }) =>
             isActive
-              ? 'flex items-center  px-3 py-2 bg-orange-700 text-white rounded-md duration-300 font-semibold  font-fontPrimary'
-              : 'flex items-center font-display text-black px-3 py-2 font-fontPrimary'
+              ? 'flex items-center  px-3 py-2 bg-orange-700 text-white rounded-md duration-300 font-semibold  font-lato'
+              : 'flex items-center font-display text-black px-3 py-2 font-lato'
           }
         >
           My Bookings
@@ -188,7 +188,7 @@ function NavBar() {
       >
         <div className="flex items-center justify-between text-blue-gray-900">
           <Link to="/">
-            <Typography className="mr-4 cursor-pointer py-1.5 font-semibold lg:font-bold text-xl md:text-2xl text-black font-fontPrimary">
+            <Typography className="mr-4 cursor-pointer py-1.5 font-semibold lg:font-bold text-xl md:text-2xl text-black font-lato">
               Hotel<span className="text-red-700">H</span>ive
             </Typography>
           </Link>
@@ -200,7 +200,7 @@ function NavBar() {
                   <Button
                     variant="filled"
                     size="md"
-                    className="hidden lg:inline-block"
+                    className="hidden lg:inline-block font-lato"
                   >
                     <span>Sign In</span>
                   </Button>
@@ -209,7 +209,7 @@ function NavBar() {
                   <Button
                     variant="filled"
                     size="md"
-                    className="hidden lg:inline-block"
+                    className="hidden lg:inline-block font-lato"
                   >
                     <span>Sign Up</span>
                   </Button>
@@ -234,7 +234,7 @@ function NavBar() {
                   onClick={handleLogOut}
                   variant="filled"
                   size="md"
-                  className="hidden lg:inline-block"
+                  className="hidden lg:inline-block font-lato"
                 >
                   <span>LogOut</span>
                 </Button>
@@ -299,20 +299,20 @@ function NavBar() {
               <Button
                 variant="filled"
                 size="sm"
-                className="inline-block lg:hidden"
+                className="inline-block lg:hidden font-lato"
               >
-                <span onClick={handleLogOut}>LogOut</span>
+                <span  onClick={handleLogOut}>LogOut</span>
               </Button>
             </div>
           ) : (
             <div className="flex items-center gap-4">
               <Link className="w-full" to="/signin">
-                <Button fullWidth variant="filled" size="sm" className="">
+                <Button fullWidth variant="filled" size="sm" className="font-lato">
                   <span>Log In</span>
                 </Button>
               </Link>
               <Link className="w-full" to="/signup">
-                <Button fullWidth variant="filled" size="sm" className="">
+                <Button fullWidth variant="filled" size="sm" className="font-lato">
                   <span>Sign Up</span>
                 </Button>
               </Link>
