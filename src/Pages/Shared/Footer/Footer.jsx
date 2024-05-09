@@ -1,16 +1,12 @@
+import { Link } from "react-router-dom";
+
 function Footer() {
   return (
     <div className=" mt-8 md:mt-10 lg:mt-12   font-fontPrimary">
       <footer className="bg-white dark:bg-gray-900">
         <div className="container px-6 py-8 mx-auto">
           <div className="flex flex-col items-center text-center">
-            <a href="#">
-              <img
-                className="w-auto h-7"
-                src="https://merakiui.com/images/full-logo.svg"
-                alt=""
-              />
-            </a>
+            <Link className="text-xl md:text-2xl font-semibold lg:font-bold" to='/'>HotelHive</Link>
 
             <div className="flex flex-wrap justify-center mt-6 -mx-4">
               <a
