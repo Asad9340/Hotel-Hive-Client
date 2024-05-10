@@ -6,13 +6,19 @@ import { AuthContext } from './../../Firebase/AuthProvider';
 import Swal from 'sweetalert2';
 function ViewDetails() {
   const { user, loading } = useContext(AuthContext);
+  const [booking, setBooking] = useState([]);
   const { id } = useParams();
   const [room, setRoom] = useState([]);
   useEffect(() => {
     axios.get(`http://localhost:5000/rooms/${id}`).then(res => {
       setRoom(res.data);
     });
-  }, [id]);
+  }, [id,booking]);
+  useEffect(() => {
+    axios.get(`http://localhost:5000/booking`).then(res => {
+      setBooking(res.data);
+    })
+  }, []);
 
   const handleBookNow = e => {
     e.preventDefault();
@@ -24,45 +30,45 @@ function ViewDetails() {
       status: 'Unavailable',
       image: room?.roomImage,
       title: room?.title,
-      rating: room?.tating,
+      rating: room?.rating,
       area: room?.roomSize,
+      token: room?._id,
     };
-    console.log(bookingInfo);
-    fetch('http://localhost:5000/booking', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify(bookingInfo),
-    })
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        Swal.fire({
-          title: 'Booking Summary...',
-          html: `
+    Swal.fire({
+      title: 'Booking Summary...',
+      html: `
               <br /> Title: ${room?.title} <br />
               Rating: ${room?.rating} <br />
               Coast: ${room?.pricePerNight} <br />
               Area: ${room?.roomSize} <br />
               Exprected Date: ${date}
   `,
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, Confirm Booking',
-        }).then(result => {
-          if (result.isConfirmed) {
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Confirm Booking',
+    }).then(result => {
+      if (result.isConfirmed) {
+        fetch('http://localhost:5000/booking', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify(bookingInfo),
+        })
+          .then(res => res.json())
+          .then(data => {
+            console.log(data);
             Swal.fire({
               title: 'Booked!',
               text: 'Your Booking has been confirmed.',
               icon: 'success',
             });
-          }
-        });
-      });
+          });
+      }
+    });
   };
-
+  console.log(room?._id,booking[0]?.token)
   return (
     <div>
       {loading ? (
@@ -148,12 +154,21 @@ function ViewDetails() {
                     className="input input-bordered input-accent w-full max-w-xs"
                   />
                 </div>
-                <button
-                  type="submit"
-                  className="bg-green-800 w-full py-2 rounded-md text-white active:bg-green-900 hover:bg-green-700"
-                >
-                  Book Now
-                </button>
+                {booking[0]?.token === room?._id ? (
+                  <button
+                    type="submit"
+                    className="bg-green-800 w-full py-2 rounded-md text-white active:bg-green-900 hover:bg-green-700"
+                  >
+                   Unavailable
+                  </button>
+                ) : (
+                  <button
+                    type="submit"
+                    className="bg-green-800 w-full py-2 rounded-md text-white active:bg-green-900 hover:bg-green-700"
+                  >
+                    Book Now
+                  </button>
+                )}
               </form>
             </div>
           </div>
