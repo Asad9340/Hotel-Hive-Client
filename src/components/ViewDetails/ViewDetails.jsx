@@ -6,19 +6,14 @@ import { AuthContext } from './../../Firebase/AuthProvider';
 import Swal from 'sweetalert2';
 function ViewDetails() {
   const { user, loading } = useContext(AuthContext);
-  const [booking, setBooking] = useState([]);
   const { id } = useParams();
   const [room, setRoom] = useState([]);
   useEffect(() => {
     axios.get(`http://localhost:5000/rooms/${id}`).then(res => {
       setRoom(res.data);
     });
-  }, [id,booking]);
-  useEffect(() => {
-    axios.get(`http://localhost:5000/booking`).then(res => {
-      setBooking(res.data);
-    })
-  }, []);
+  }, [id]);
+
 
   const handleBookNow = e => {
     e.preventDefault();
@@ -68,7 +63,6 @@ function ViewDetails() {
       }
     });
   };
-  console.log(room?._id,booking[0]?.token)
   return (
     <div>
       {loading ? (
@@ -154,21 +148,13 @@ function ViewDetails() {
                     className="input input-bordered input-accent w-full max-w-xs"
                   />
                 </div>
-                {booking[0]?.token === room?._id ? (
-                  <button
-                    type="submit"
-                    className="bg-green-800 w-full py-2 rounded-md text-white active:bg-green-900 hover:bg-green-700"
-                  >
-                   Unavailable
-                  </button>
-                ) : (
-                  <button
-                    type="submit"
-                    className="bg-green-800 w-full py-2 rounded-md text-white active:bg-green-900 hover:bg-green-700"
-                  >
-                    Book Now
-                  </button>
-                )}
+                <button
+                  disabled={!room?.availability}
+                  type="submit"
+                  className="bg-green-800 w-full py-2 rounded-md text-white active:bg-green-900 hover:bg-green-700"
+                >
+                  {room?.availability ? 'Book Now' : 'Unavailable'}
+                </button>
               </form>
             </div>
           </div>
