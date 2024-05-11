@@ -10,6 +10,7 @@ import AboutUs from '../components/AboutUs/AboutUs';
 import ContactUs from '../components/ContactUs/ContactUs';
 import ViewDetails from '../components/ViewDetails/ViewDetails';
 import PrivateRoute from './PrivateRoute';
+import Review from '../components/Review/Review';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: '/contact-us',
         element: <ContactUs />,
+      },
+      {
+        path: '/review/:id',
+        element: <Review/>
       },
       {
         path: '/rooms/:id',

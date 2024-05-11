@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Firebase/AuthProvider';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 
 function MyBookings() {
   const { user } = useContext(AuthContext);
@@ -112,10 +113,11 @@ function MyBookings() {
                   <td>{item.rating}</td>
                   <td>{item.date}</td>
                   <td>
-                    {' '}
-                    <button className="px-3 py-2 bg-red-700 rounded-md text-white">
-                      Review
-                    </button>
+                    <Link to={`/review/${item._id}`}>
+                      <button className="px-3 py-2 bg-red-700 rounded-md text-white">
+                        Review
+                      </button>
+                    </Link>
                   </td>
                   <td>
                     <button
