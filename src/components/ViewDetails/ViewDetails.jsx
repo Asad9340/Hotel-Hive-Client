@@ -8,12 +8,12 @@ function ViewDetails() {
   const { user, loading } = useContext(AuthContext);
   const { id } = useParams();
   const [room, setRoom] = useState([]);
+  const [control, setControl] = useState(false);
   useEffect(() => {
     axios.get(`http://localhost:5000/rooms/${id}`).then(res => {
       setRoom(res.data);
     });
-  }, [id]);
-
+  }, [id, control]);
 
   const handleBookNow = e => {
     e.preventDefault();
@@ -59,6 +59,23 @@ function ViewDetails() {
               text: 'Your Booking has been confirmed.',
               icon: 'success',
             });
+          });
+
+        let status = !room?.availability;
+
+        fetch(`http://localhost:5000/rooms/update/${room?._id}`, {
+          method: 'PUT',
+          headers: {
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify({ status }),
+        })
+          .then(res => res.json())
+          .then(data => {
+            console.log(data);
+            if (data.modifiedCount) {
+              setControl(!control)
+            }
           });
       }
     });
