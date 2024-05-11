@@ -72,9 +72,8 @@ function ViewDetails() {
         })
           .then(res => res.json())
           .then(data => {
-            console.log(data);
             if (data.modifiedCount) {
-              setControl(!control)
+              setControl(!control);
             }
           });
       }
