@@ -1,17 +1,22 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 function Footer() {
   return (
-    <div className=" mt-8 md:mt-10 lg:mt-12   font-fontPrimary">
-      <footer className="bg-white dark:bg-gray-900">
+    <div className=" mt-8 md:mt-10 lg:mt-12 font-lato">
+      <footer className="bg-gray-900">
         <div className="container px-6 py-8 mx-auto">
           <div className="flex flex-col items-center text-center">
-            <Link className="text-xl md:text-2xl font-semibold lg:font-bold" to='/'>HotelHive</Link>
+            <Link
+              className="text-xl md:text-2xl font-semibold lg:font-bold text-white"
+              to="/"
+            >
+              HotelHive
+            </Link>
 
             <div className="flex flex-wrap justify-center mt-6 -mx-4">
               <a
                 href="#"
-                className="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400"
+                className="mx-4 text-sm text-gray-300 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400"
                 aria-label="Reddit"
               >
                 {' '}
@@ -20,7 +25,7 @@ function Footer() {
 
               <a
                 href="#"
-                className="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400"
+                className="mx-4 text-sm text-gray-300 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400"
                 aria-label="Reddit"
               >
                 {' '}
@@ -29,7 +34,7 @@ function Footer() {
 
               <a
                 href="#"
-                className="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400"
+                className="mx-4 text-sm text-gray-300 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400"
                 aria-label="Reddit"
               >
                 {' '}
@@ -38,7 +43,7 @@ function Footer() {
 
               <a
                 href="#"
-                className="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400"
+                className="mx-4 text-sm text-gray-300 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400"
                 aria-label="Reddit"
               >
                 {' '}
@@ -47,7 +52,7 @@ function Footer() {
 
               <a
                 href="#"
-                className="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400"
+                className="mx-4 text-sm text-gray-300 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400"
                 aria-label="Reddit"
               >
                 {' '}
@@ -59,14 +64,14 @@ function Footer() {
           <hr className="my-6 border-gray-200 md:my-10 dark:border-gray-700" />
 
           <div className="flex flex-col items-center sm:flex-row sm:justify-between">
-            <p className="text-sm text-gray-500 dark:text-gray-300">
+            <p className="text-sm text-gray-400 dark:text-gray-300">
               © Copyright 2021. All Rights Reserved.
             </p>
 
             <div className="flex -mx-2">
               <a
                 href="#"
-                className="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
+                className="mx-2 text-gray-200 transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
                 aria-label="Reddit"
               >
                 <svg
@@ -81,7 +86,7 @@ function Footer() {
 
               <a
                 href="#"
-                className="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
+                className="mx-2 text-gray-200 transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
                 aria-label="Facebook"
               >
                 <svg
@@ -96,7 +101,7 @@ function Footer() {
 
               <a
                 href="#"
-                className="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
+                className="mx-2 text-gray-200 transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
                 aria-label="Github"
               >
                 <svg
