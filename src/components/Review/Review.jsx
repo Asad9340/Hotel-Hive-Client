@@ -1,12 +1,13 @@
 import { useContext } from 'react';
 import { AuthContext } from '../../Firebase/AuthProvider';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { Helmet } from 'react-helmet';
 
 function Review() {
   const { user } = useContext(AuthContext);
   const { token } = useParams();
+  const navigate = useNavigate();
   console.log(token);
   const handleReview = e => {
     e.preventDefault();
@@ -36,6 +37,7 @@ console.log(token)
               title: 'Added Review Successfully',
             });
             e.target.reset();
+            navigate('/my-bookings');
           }
         });
 
@@ -70,7 +72,7 @@ console.log(token)
             name="rating"
             required
             placeholder="Type Your Rating"
-            min="0"
+            min="1"
             max="5"
             step="0.1"
             className="input input-bordered input-accent w-full"
