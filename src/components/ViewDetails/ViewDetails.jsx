@@ -101,7 +101,7 @@ function ViewDetails() {
                   className="rounded-lg w-full h-[400px] lg:h-[500px]"
                   alt=""
                 />
-                <p className="absolute top-10 left-0 bg-[#008234] text-white rounded-r-lg font-semibold p-2 ">
+                <p className="absolute top-10 left-0 bg-[#008234] text-white rounded-r-lg font-semibold p-4 ">
                   {room.specialOffers}
                 </p>
               </div>
