@@ -1,6 +1,11 @@
+import { Helmet } from "react-helmet";
+
 function AboutUs() {
   return (
     <div>
+      <Helmet>
+        <title>About Page</title>
+      </Helmet>
       <div className="sm:flex items-center max-w-screen-xl">
         <div className="sm:w-1/2 p-10">
           <div className="image object-center text-center">

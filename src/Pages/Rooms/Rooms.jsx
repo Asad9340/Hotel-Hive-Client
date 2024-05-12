@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { Helmet } from 'react-helmet';
 AOS.init();
 
 function Rooms() {
@@ -17,6 +18,9 @@ function Rooms() {
 
   return (
     <div className="mt-8 ">
+      <Helmet>
+        <title>Rooms</title>
+      </Helmet>
       <h2 className="text-center text-3xl font-semibold">
         Available Rooms: {rooms?.length}
       </h2>

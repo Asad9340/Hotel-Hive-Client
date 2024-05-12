@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../Firebase/AuthProvider';
 import { useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet';
 
 function Review() {
   const { user } = useContext(AuthContext);
@@ -44,6 +45,9 @@ console.log(token)
   };
   return (
     <div className="my-8 md:my-12">
+      <Helmet>
+        <title>Review</title>
+      </Helmet>
       <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold lg:font-bold text-center mb-6">
         Review Page
       </h2>

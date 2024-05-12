@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Firebase/AuthProvider';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 function MyBookings() {
   const { user } = useContext(AuthContext);
@@ -87,6 +88,9 @@ function MyBookings() {
 
   return (
     <div className="space-y-6 my-10">
+      <Helmet>
+        <title>My Booking</title>
+      </Helmet>
       <div>
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold md:font-bold lg:font-extrabold text-center">
           My Booking List{' '}
