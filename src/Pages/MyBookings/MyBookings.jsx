@@ -83,6 +83,7 @@ function MyBookings() {
         });
     }
   };
+  console.log(myBooking[0]?.token);
 
   return (
     <div className="space-y-6 my-10">
@@ -109,11 +110,11 @@ function MyBookings() {
               {myBooking.map((item, index) => (
                 <tr key={item._id}>
                   <th>{index + 1}</th>
-                  <td>{item.name}</td>
+                  <td>{item.title}</td>
                   <td>{item.rating}</td>
                   <td>{item.date}</td>
                   <td>
-                    <Link to={`/review/${item._id}`}>
+                    <Link to={`/rooms/review/${item?.token}`}>
                       <button className="px-3 py-2 bg-red-700 rounded-md text-white">
                         Review
                       </button>

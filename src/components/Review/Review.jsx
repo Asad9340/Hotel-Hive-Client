@@ -1,13 +1,46 @@
 import { useContext } from 'react';
 import { AuthContext } from '../../Firebase/AuthProvider';
+import { useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 function Review() {
   const { user } = useContext(AuthContext);
+  const { token } = useParams();
+  console.log(token);
   const handleReview = e => {
     e.preventDefault();
     const rating = e.target.rating.value;
     const ratingDescription = e.target.ratingDescription.value;
-    console.log(rating, ratingDescription);
+    const timestamp = Date.now();
+    const review = {
+      rating,
+      ratingDescription,
+      username: user?.displayName,
+      timestamp,
+    }
+    console.log(review);
+console.log(token)
+      fetch(`http://localhost:5000/rooms/review/${token}`, {
+        method: 'PUT',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({ review }),
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.modifiedCount) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Added Review Successfully',
+            });
+            e.target.reset();
+          }
+        });
+
+
+
+
   };
   return (
     <div className="my-8 md:my-12">
@@ -40,7 +73,7 @@ function Review() {
           />
         </div>
         <div>
-          <label htmlFor="date">Date</label>
+          <label htmlFor="date">Description</label>
           <textarea
             placeholder="Bio"
             required

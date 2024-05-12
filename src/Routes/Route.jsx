@@ -50,7 +50,7 @@ const router = createBrowserRouter([
         element: <ContactUs />,
       },
       {
-        path: '/review/:id',
+        path: '/rooms/review/:token',
         element: <Review/>
       },
       {

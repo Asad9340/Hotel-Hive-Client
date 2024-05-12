@@ -10,6 +10,8 @@ function Rooms() {
       setRooms(res.data);
     });
   }, []);
+
+
   return (
     <div className="mt-8 ">
       <h2 className="text-center text-3xl font-semibold">
