@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../../Firebase/AuthProvider';
 import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -8,6 +8,7 @@ function Review() {
   const { user } = useContext(AuthContext);
   const { token } = useParams();
   const navigate = useNavigate();
+  const [isDisabled, setDisabled] = useState(false);
   console.log(token);
   const handleReview = e => {
     e.preventDefault();
@@ -20,8 +21,6 @@ function Review() {
       username: user?.displayName,
       timestamp,
     }
-    console.log(review);
-console.log(token)
       fetch(`http://localhost:5000/rooms/review/${token}`, {
         method: 'PUT',
         headers: {
@@ -37,13 +36,10 @@ console.log(token)
               title: 'Added Review Successfully',
             });
             e.target.reset();
+            setDisabled(true);
             navigate('/my-bookings');
           }
         });
-
-
-
-
   };
   return (
     <div className="my-8 md:my-12">
@@ -89,6 +85,7 @@ console.log(token)
         </div>
         <button
           type="submit"
+          disabled={isDisabled}
           className="bg-green-800 w-full py-2 rounded-md text-white active:bg-green-900 hover:bg-green-700"
         >
           Review
