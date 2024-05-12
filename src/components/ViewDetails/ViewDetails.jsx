@@ -10,11 +10,22 @@ function ViewDetails() {
   const { id } = useParams();
   const [room, setRoom] = useState([]);
   const [control, setControl] = useState(false);
+  const [minDate, setMinDate] = useState('');
+
   useEffect(() => {
     axios.get(`http://localhost:5000/rooms/${id}`).then(res => {
       setRoom(res.data);
     });
   }, [id, control]);
+
+  useEffect(() => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    const todayString = `${year}-${month}-${day}`;
+    setMinDate(todayString);
+  }, []);
 
   const handleBookNow = e => {
     e.preventDefault();
@@ -168,7 +179,8 @@ function ViewDetails() {
                     <label htmlFor="date">Date</label>
                     <input
                       type="date"
-                      name="date"
+                        name="date"
+                        min={minDate}
                       required
                       placeholder="Type here"
                       className="input input-bordered input-accent w-full"
@@ -191,9 +203,9 @@ function ViewDetails() {
               {reviews?.length ? (
                 'Review is comming soon...'
               ) : (
-                <h2 className='border border-gray-700 p-5 my-3 rounded-lg'>
-                  Currently, there are no reviews for this room at our hotel.
-                  We appreciate your interest and welcome any feedback you may
+                <h2 className="border border-gray-700 p-5 my-3 rounded-lg">
+                  Currently, there are no reviews for this room at our hotel. We
+                  appreciate your interest and welcome any feedback you may
                   have.
                 </h2>
               )}
