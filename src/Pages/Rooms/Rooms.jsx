@@ -2,6 +2,9 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+AOS.init();
 
 function Rooms() {
   const [rooms, setRooms] = useState([]);
@@ -33,16 +36,23 @@ function Rooms() {
                   {room.availability ? 'Available' : 'Not Available'}
                 </p>
               </div>
-              <h2 className="text-xl font-semibold">{room.title}</h2>
-              <p className="text-sm mb-3">Hotel in Dhaka</p>
+              <h2 data-aos="fade-up" className="text-xl font-semibold">
+                {room.title}
+              </h2>
+              <p data-aos="fade-down" className="text-sm mb-3">
+                Hotel in Dhaka
+              </p>
               <div className="flex items-center gap-2">
                 <p>
-                  <span className="bg-[#003B95] text-white p-2 rounded-t-md rounded-br-md">
+                  <span
+                    data-aos="fade-up"
+                    className="bg-[#003B95] text-white p-2 rounded-t-md rounded-br-md"
+                  >
                     {room.rating}
                     {'  '}
                   </span>
                 </p>
-                <p>
+                <p data-aos="fade-up">
                   {room.rating > 4.6
                     ? 'Wonderful'
                     : room.rating > 4.4
