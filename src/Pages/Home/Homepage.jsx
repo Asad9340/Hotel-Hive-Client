@@ -10,10 +10,10 @@ function Homepage() {
   useEffect(() => {
 Swal.fire({
   imageUrl:
-    'https://png.pngtree.com/png-vector/20221107/ourmid/pngtree-up-to-20-off-price-tag-design-png-image_6429660.png',
+    'https://i.postimg.cc/WpChNVV6/pngtree-up-to-20-off-price-tag-design-png-image-6429660.png',
   imageHeight: 300,
   imageWidth: 400,
-  imageAlt: 'A tall image',
+  imageAlt: 'A Special Offer Image',
 });
   },[])
   return (

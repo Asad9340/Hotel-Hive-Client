@@ -4,6 +4,7 @@ import { AuthContext } from '../../Firebase/AuthProvider';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import moment from 'moment';
 
 function MyBookings() {
   const { user } = useContext(AuthContext);
@@ -16,47 +17,60 @@ function MyBookings() {
     });
   }, [email, control]);
 
-  const handleCancelBooking = (token, id) => {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!',
-    }).then(result => {
-      if (result.isConfirmed) {
-        let status = true;
-        fetch(`http://localhost:5000/rooms/update/${token}`, {
-          method: 'PUT',
-          headers: {
-            'content-type': 'application/json',
-          },
-          body: JSON.stringify({ status }),
-        })
-          .then(res => res.json())
-          .then(data => {
-            if (data.modifiedCount) {
-              fetch(`http://localhost:5000/my-booking/${id}`, {
-                method: 'DELETE',
-              })
-                .then(res => res.json())
-                .then(data => {
-                  console.log(data);
-                  if (data.deletedCount > 0) {
-                    setControl(!control);
-                    Swal.fire({
-                      title: 'Deleted!',
-                      text: 'Your file has been deleted.',
-                      icon: 'success',
+  const handleCancelBooking = (token, id, date) => {
+    const bookedDate = moment(date);
+    const cancellationDeadline = bookedDate.clone().subtract(1, 'day');
+    const currentDate = moment();
+    if (currentDate.isBefore(cancellationDeadline, 'day')) {
+      console.log(
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!',
+        }).then(result => {
+          if (result.isConfirmed) {
+            let status = true;
+            fetch(`http://localhost:5000/rooms/update/${token}`, {
+              method: 'PUT',
+              headers: {
+                'content-type': 'application/json',
+              },
+              body: JSON.stringify({ status }),
+            })
+              .then(res => res.json())
+              .then(data => {
+                if (data.modifiedCount) {
+                  fetch(`http://localhost:5000/my-booking/${id}`, {
+                    method: 'DELETE',
+                  })
+                    .then(res => res.json())
+                    .then(data => {
+                      if (data.deletedCount > 0) {
+                        setControl(!control);
+                        Swal.fire({
+                          title: 'Deleted!',
+                          text: 'Your file has been deleted.',
+                          icon: 'success',
+                        });
+                      }
                     });
-                  }
-                });
-            }
-          });
-      }
-    });
+                }
+              });
+          }
+        })
+      );
+    } else {
+      console.log('Sorry, the cancellation deadline has passed.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Sorry, the cancellation deadline has passed!',
+      });
+    }
   };
   const handleDateUpdate = async id => {
     const { value: date } = await Swal.fire({
@@ -84,7 +98,6 @@ function MyBookings() {
         });
     }
   };
-  console.log(myBooking[0]?.token);
 
   return (
     <div className="space-y-6 my-10">
@@ -93,7 +106,7 @@ function MyBookings() {
       </Helmet>
       <div>
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold md:font-bold lg:font-extrabold text-center">
-          My Booking List{' '}
+          My Booking List
         </h2>
       </div>
       <div>
@@ -135,7 +148,7 @@ function MyBookings() {
                   <td>
                     <button
                       onClick={() =>
-                        handleCancelBooking(item?.token, item?._id)
+                        handleCancelBooking(item?.token, item?._id, item?.date)
                       }
                       className="px-3 py-2 bg-red-700 rounded-md text-white"
                     >
