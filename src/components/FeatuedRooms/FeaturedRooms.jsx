@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 function FeaturedRooms() {
   const [featuredRoom, setFeaturedRoom] = useState([]);
   useEffect(() => {
-    axios.get(`http://localhost:5000/rooms`).then(res => {
+    axios.get(`https://hotel-hive-server.vercel.app/rooms`,{withCredentials:true}).then(res => {
       const data = res.data;
       const newData = data.slice(0, 6);
       setFeaturedRoom(newData);

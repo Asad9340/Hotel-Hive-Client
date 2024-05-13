@@ -14,7 +14,7 @@ function ViewDetails() {
   const [review, setReview] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/rooms/${id}`).then(res => {
+    axios.get(`https://hotel-hive-server.vercel.app/rooms/${id}`,{withCredentials:true}).then(res => {
       setRoom(res.data);
     });
   }, [id, control]);
@@ -57,7 +57,7 @@ function ViewDetails() {
       confirmButtonText: 'Yes, Confirm Booking',
     }).then(result => {
       if (result.isConfirmed) {
-        fetch('http://localhost:5000/booking', {
+        fetch('https://hotel-hive-server.vercel.app/booking', {
           method: 'POST',
           headers: {
             'content-type': 'application/json',
@@ -76,13 +76,16 @@ function ViewDetails() {
 
         let status = !room?.availability;
 
-        fetch(`http://localhost:5000/rooms/update/${room?._id}`, {
-          method: 'PUT',
-          headers: {
-            'content-type': 'application/json',
-          },
-          body: JSON.stringify({ status }),
-        })
+        fetch(
+          `https://hotel-hive-server.vercel.app/rooms/update/${room?._id}`,
+          {
+            method: 'PUT',
+            headers: {
+              'content-type': 'application/json',
+            },
+            body: JSON.stringify({ status }),
+          },{Credential:'include'}
+        )
           .then(res => res.json())
           .then(data => {
             if (data.modifiedCount) {
@@ -92,10 +95,8 @@ function ViewDetails() {
       }
     });
   };
-  const { reviews } = room;
-
   useEffect(() => {
-    axios.get(`http://localhost:5000/review/${id}`).then(res => {
+    axios.get(`https://hotel-hive-server.vercel.app/review/${id}`,{withCredentials:true}).then(res => {
       setReview(res.data);
     });
   }, [id]);

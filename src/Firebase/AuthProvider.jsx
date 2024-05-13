@@ -11,6 +11,7 @@ import {
 import { createContext, useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import auth from './firebase.config';
+import axios from 'axios';
 
 export const AuthContext = createContext();
 const googleProvider = new GoogleAuthProvider();
@@ -49,7 +50,6 @@ function AuthProvider({ children }) {
     });
   };
 
-
   //logOut
   const logOut = () => {
     signOut(auth).then(() => {
@@ -62,6 +62,14 @@ function AuthProvider({ children }) {
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
       setUser(currentUser);
       setLoading(false);
+      if (currentUser) {
+        const loggedUser = { email: currentUser.email };
+        axios
+          .post('http://localhost:5000/jwt', loggedUser, {withCredentials:true})
+          .then(() => {
+              console.log('hello')
+          });
+      }
     });
 
     return () => unsubscribe();

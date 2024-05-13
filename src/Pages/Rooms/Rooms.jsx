@@ -10,22 +10,33 @@ AOS.init();
 function Rooms() {
   const [rooms, setRooms] = useState([]);
   useEffect(() => {
-    axios.get(`http://localhost:5000/rooms`).then(res => {
-      setRooms(res.data);
-    });
+    axios
+      .get(`https://hotel-hive-server.vercel.app/rooms`, {
+        withCredentials: true,
+      })
+      .then(res => {
+        setRooms(res.data);
+      });
   }, []);
 
   const handleAllFilter = () => {
-    axios.get(`http://localhost:5000/rooms`).then(res => {
-      setRooms(res.data);
-    });
+    axios
+      .get(`https://hotel-hive-server.vercel.app/rooms`, {
+        withCredentials: true,
+      })
+      .then(res => {
+        setRooms(res.data);
+      });
   };
   const handleLowFilter = () => {
     const lowValue = 0;
     const highValue = 2000;
     (async () => {
       axios
-        .get(`http://localhost:5000/room/${lowValue}/${highValue}`)
+        .get(
+          `https://hotel-hive-server.vercel.app/room/${lowValue}/${highValue}`,
+          { withCredentials: true }
+        )
         .then(res => {
           setRooms(res.data);
         });
@@ -37,7 +48,10 @@ function Rooms() {
     const highValue = 5000;
     (async () => {
       axios
-        .get(`http://localhost:5000/room/${lowValue}/${highValue}`)
+        .get(
+          `https://hotel-hive-server.vercel.app/room/${lowValue}/${highValue}`,
+          { withCredentials: true }
+        )
         .then(res => {
           setRooms(res.data);
         });
@@ -48,7 +62,10 @@ function Rooms() {
     const highValue = 10000000;
     (async () => {
       axios
-        .get(`http://localhost:5000/room/${lowValue}/${highValue}`)
+        .get(
+          `https://hotel-hive-server.vercel.app/room/${lowValue}/${highValue}`,
+          { withCredentials: true }
+        )
         .then(res => {
           setRooms(res.data);
         });
@@ -74,7 +91,7 @@ function Rooms() {
           <Option onClick={handleAllFilter}>All</Option>
           <Option onClick={handleLowFilter}>Price 0 to 2000</Option>
           <Option onClick={handleMidFilter}>Price 2001 to 5000</Option>
-          <Option onClick={handleHighFilter}>Price 5001 to 10000</Option>
+          <Option onClick={handleHighFilter}>Price 5001 to Max</Option>
         </Select>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4  rounded-lg">

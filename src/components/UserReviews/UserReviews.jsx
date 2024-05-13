@@ -7,7 +7,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 function UserReviews() {
   const [review, setReview] = useState([]);
   useEffect(() => {
-    axios.get(`http://localhost:5000/review`).then(res => {
+    axios.get(`https://hotel-hive-server.vercel.app/review`,{withCredentials:true}).then(res => {
       setReview(res.data);
     });
   }, []);
@@ -45,7 +45,9 @@ function UserReviews() {
             ))}
           </Swiper>
         ) : (
-          <p className='text-center text-lg font-semibold mt-6'>There is now review yet...</p>
+          <p className="text-center text-lg font-semibold mt-6">
+            There is now review yet...
+          </p>
         )}
       </div>
     </div>

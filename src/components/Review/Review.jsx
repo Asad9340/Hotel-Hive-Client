@@ -22,7 +22,7 @@ function Review() {
       id: token,
     };
 
-    fetch(`http://localhost:5000/rooms/review/${token}`, {
+    fetch(`https://hotel-hive-server.vercel.app/rooms/review/${token}`, {
       method: 'PUT',
       headers: {
         'content-type': 'application/json',
@@ -32,12 +32,12 @@ function Review() {
       .then(res => res.json())
       .then(data => {
         if (data.modifiedCount) {
-          console.log("updated review");
+          console.log('updated review');
           setDisabled(true);
         }
       });
 
-    fetch(`http://localhost:5000/rooms/review/${token}`, {
+    fetch(`https://hotel-hive-server.vercel.app/rooms/review/${token}`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',

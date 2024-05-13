@@ -12,9 +12,11 @@ function MyBookings() {
   const [myBooking, setMyBooking] = useState([]);
   const [control, setControl] = useState(false);
   useEffect(() => {
-    axios.get(`http://localhost:5000/my-booking?email=${email}`).then(res => {
-      setMyBooking(res.data);
-    });
+    axios
+      .get(`https://hotel-hive-server.vercel.app/my-booking?email=${email}`)
+      .then(res => {
+        setMyBooking(res.data);
+      });
   }, [email, control]);
 
   const handleCancelBooking = (token, id, date) => {
@@ -34,19 +36,25 @@ function MyBookings() {
         }).then(result => {
           if (result.isConfirmed) {
             let status = true;
-            fetch(`http://localhost:5000/rooms/update/${token}`, {
-              method: 'PUT',
-              headers: {
-                'content-type': 'application/json',
-              },
-              body: JSON.stringify({ status }),
-            })
+            fetch(
+              `https://hotel-hive-server.vercel.app/rooms/update/${token}`,
+              {
+                method: 'PUT',
+                headers: {
+                  'content-type': 'application/json',
+                },
+                body: JSON.stringify({ status }),
+              }
+            )
               .then(res => res.json())
               .then(data => {
                 if (data.modifiedCount) {
-                  fetch(`http://localhost:5000/my-booking/${id}`, {
-                    method: 'DELETE',
-                  })
+                  fetch(
+                    `https://hotel-hive-server.vercel.app/my-booking/${id}`,
+                    {
+                      method: 'DELETE',
+                    }
+                  )
                     .then(res => res.json())
                     .then(data => {
                       if (data.deletedCount > 0) {
@@ -82,7 +90,7 @@ function MyBookings() {
       },
     });
     if (date) {
-      fetch(`http://localhost:5000/my-booking/update/${id}`, {
+      fetch(`https://hotel-hive-server.vercel.app/my-booking/update/${id}`, {
         method: 'PUT',
         headers: {
           'content-type': 'application/json',
@@ -132,7 +140,7 @@ function MyBookings() {
                   <td>{item.date}</td>
                   <td>
                     <Link to={`/rooms/review/${item?.token}`}>
-                      <button className="px-3 py-2 bg-red-700 rounded-md text-white">
+                      <button className="px-3 py-2 bg-blue-700 rounded-md text-white">
                         Review
                       </button>
                     </Link>
@@ -140,7 +148,7 @@ function MyBookings() {
                   <td>
                     <button
                       onClick={() => handleDateUpdate(item._id)}
-                      className="px-3 py-2 bg-red-700 rounded-md text-white"
+                      className="px-3 py-2 bg-green-700 rounded-md text-white"
                     >
                       Update Date
                     </button>
