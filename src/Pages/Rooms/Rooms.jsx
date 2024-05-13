@@ -1,34 +1,59 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import { Option, Select } from '@material-tailwind/react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { Helmet } from 'react-helmet';
-// import { Option, Select } from '@material-tailwind/react';
 AOS.init();
 
 function Rooms() {
   const [rooms, setRooms] = useState([]);
-  // const [filter, setFilter] = useState('');
-  //  const handleAllFilter = () => {
-  //    const value = 2000;
-  //    setFilter(value);
-  //    console.log(filter);
-  //  };
-  const [review, setReview] = useState([]);
-  useEffect(() => {
-    axios.get(`http://localhost:5000/review`).then(res => {
-      setReview(res.data);
-    });
-  }, []);
-
   useEffect(() => {
     axios.get(`http://localhost:5000/rooms`).then(res => {
       setRooms(res.data);
     });
   }, []);
-  console.log(review)
+
+  const handleAllFilter = () => {
+    axios.get(`http://localhost:5000/rooms`).then(res => {
+      setRooms(res.data);
+    });
+  };
+  const handleLowFilter = () => {
+    const lowValue = 0;
+    const highValue = 2000;
+    (async () => {
+      axios
+        .get(`http://localhost:5000/room/${lowValue}/${highValue}`)
+        .then(res => {
+          setRooms(res.data);
+        });
+    })();
+  };
+
+  const handleMidFilter = () => {
+    const lowValue = 2001;
+    const highValue = 5000;
+    (async () => {
+      axios
+        .get(`http://localhost:5000/room/${lowValue}/${highValue}`)
+        .then(res => {
+          setRooms(res.data);
+        });
+    })();
+  };
+  const handleHighFilter = () => {
+    const lowValue = 5001;
+    const highValue = 10000000;
+    (async () => {
+      axios
+        .get(`http://localhost:5000/room/${lowValue}/${highValue}`)
+        .then(res => {
+          setRooms(res.data);
+        });
+    })();
+  };
 
   return (
     <div className="mt-8 space-y-3 ">
@@ -38,15 +63,20 @@ function Rooms() {
       <h2 className="text-center text-3xl font-semibold">
         Available Rooms: {rooms?.length}
       </h2>
-      {/* <div className="flex justify-center">
-        <div className="w-72 flex">
-          <Select label="Select Filter Option">
-            <Option onClick={handleAllFilter}>Pirce 0 to 2000</Option>
-            <Option >Yes</Option>
-            <Option >No</Option>
-          </Select>
-        </div>
-      </div> */}
+      <div className="w-full">
+        <label
+          className="  block  text-blueGray-600 text-lg font-bold mb-2"
+          htmlFor="grid-password"
+        >
+          Filter By Price
+        </label>
+        <Select label="Select Filter Option">
+          <Option onClick={handleAllFilter}>All</Option>
+          <Option onClick={handleLowFilter}>Price 0 to 2000</Option>
+          <Option onClick={handleMidFilter}>Price 2001 to 5000</Option>
+          <Option onClick={handleHighFilter}>Price 5001 to 10000</Option>
+        </Select>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4  rounded-lg">
         {rooms.map(room => (
           <div key={room._id}>
