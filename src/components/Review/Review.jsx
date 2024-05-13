@@ -20,26 +20,47 @@ function Review() {
       ratingDescription,
       username: user?.displayName,
       timestamp,
+      id:token,
     }
-      fetch(`http://localhost:5000/rooms/review/${token}`, {
-        method: 'PUT',
-        headers: {
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify({ review }),
-      })
-        .then(res => res.json())
-        .then(data => {
-          if (data.modifiedCount) {
-            Swal.fire({
-              icon: 'success',
-              title: 'Added Review Successfully',
+      // fetch(`http://localhost:5000/rooms/review/${token}`, {
+      //   method: 'PUT',
+      //   headers: {
+      //     'content-type': 'application/json',
+      //   },
+      //   body: JSON.stringify({ review }),
+      // })
+      //   .then(res => res.json())
+      //   .then(data => {
+      //     if (data.modifiedCount) {
+      //       Swal.fire({
+      //         icon: 'success',
+      //         title: 'Added Review Successfully',
+      //       });
+      //       e.target.reset();
+      //       setDisabled(true);
+      //       navigate('/my-bookings');
+      //     }
+    //   });
+
+          fetch(`http://localhost:5000/rooms/review/${token}`, {
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json',
+            },
+            body: JSON.stringify({ review }),
+          })
+            .then(res => res.json())
+            .then(data => {
+              console.log(data);
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Added Review Successfully',
+                });
+                e.target.reset();
+                setDisabled(true);
+                navigate('/my-bookings');
             });
-            e.target.reset();
-            setDisabled(true);
-            navigate('/my-bookings');
-          }
-        });
+
   };
   return (
     <div className="my-8 md:my-12">
