@@ -11,6 +11,7 @@ function ViewDetails() {
   const [room, setRoom] = useState([]);
   const [control, setControl] = useState(false);
   const [minDate, setMinDate] = useState('');
+  const [review, setReview] = useState([]);
 
   useEffect(() => {
     axios.get(`http://localhost:5000/rooms/${id}`).then(res => {
@@ -92,6 +93,14 @@ function ViewDetails() {
     });
   };
   const { reviews } = room;
+
+  useEffect(() => {
+    axios.get(`http://localhost:5000/review/${id}`).then(res => {
+      setReview(res.data);
+    });
+  }, [id]);
+  console.log(review);
+
   return (
     <div>
       <Helmet>
@@ -179,8 +188,8 @@ function ViewDetails() {
                     <label htmlFor="date">Date</label>
                     <input
                       type="date"
-                        name="date"
-                        min={minDate}
+                      name="date"
+                      min={minDate}
                       required
                       placeholder="Type here"
                       className="input input-bordered input-accent w-full"
@@ -199,9 +208,18 @@ function ViewDetails() {
           </div>
           <div>
             <h2 className="text-2xl font-semibold">Reviews</h2>
-            <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border">
-              {reviews?.length ? (
-                'Review is comming soon...'
+            <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-4">
+              {review?.length ? (
+                review.map(item => (
+                  <div
+                    key={item._id}
+                    className="p-5 border border-gray-300 bg-gray-100 rounded-lg space-y-3"
+                  >
+                    <p>Rating: {item.rating}</p>
+                    <p>Description: {item.ratingDescription}</p> <hr />
+                    <p className="text-xs">{item.username}</p>
+                  </div>
+                ))
               ) : (
                 <h2 className="border border-gray-700 p-5 my-3 rounded-lg">
                   Currently, there are no reviews for this room at our hotel. We

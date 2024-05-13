@@ -16,11 +16,19 @@ function Rooms() {
   //    setFilter(value);
   //    console.log(filter);
   //  };
+  const [review, setReview] = useState([]);
+  useEffect(() => {
+    axios.get(`http://localhost:5000/review`).then(res => {
+      setReview(res.data);
+    });
+  }, []);
+
   useEffect(() => {
     axios.get(`http://localhost:5000/rooms`).then(res => {
       setRooms(res.data);
     });
   }, []);
+  console.log(review)
 
   return (
     <div className="mt-8 space-y-3 ">

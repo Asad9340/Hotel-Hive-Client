@@ -8,7 +8,6 @@ function UserReviews() {
   const [review, setReview] = useState([]);
   useEffect(() => {
     axios.get(`http://localhost:5000/review`).then(res => {
-      console.log(res.data);
       setReview(res.data);
     });
   }, []);
@@ -18,32 +17,36 @@ function UserReviews() {
         User Reviews
       </h2>
       <div>
-        <Swiper
-          slidesPerView={3}
-          spaceBetween={30}
-          loop={true}
-          autoplay={{
-            delay: 2000,
-            disableOnInteraction: false,
-          }}
-          navigation={true}
-          pagination={{
-            clickable: true,
-          }}
-          modules={[Pagination, Navigation, Autoplay]}
-          className="mySwiper"
-        >
-          {review.map(item => (
-            <SwiperSlide
-              key={item._id}
-              className="p-5 border border-gray-300 bg-gray-100 rounded-lg space-y-3"
-            >
-              <p>Rating: {item.rating}</p>
-              <p>Description: {item.ratingDescription}</p> <hr />
-              <p className="text-xs">{item.username}</p>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        {review?.length ? (
+          <Swiper
+            slidesPerView={3}
+            spaceBetween={30}
+            centeredSlides={true}
+            autoplay={{
+              delay: 2000,
+              disableOnInteraction: false,
+            }}
+            pagination={{
+              clickable: true,
+            }}
+            navigation={true}
+            modules={[Autoplay, Pagination, Navigation]}
+            className="mySwiper"
+          >
+            {review.map(item => (
+              <SwiperSlide
+                key={item._id}
+                className="p-5 border border-gray-300 bg-gray-100 rounded-lg space-y-3"
+              >
+                <p>Rating: {item.rating}</p>
+                <p>Description: {item.ratingDescription}</p> <hr />
+                <p className="text-xs">{item.username}</p>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        ) : (
+          <p className='text-center text-lg font-semibold mt-6'>There is now review yet...</p>
+        )}
       </div>
     </div>
   );

@@ -9,7 +9,6 @@ function Review() {
   const { token } = useParams();
   const navigate = useNavigate();
   const [isDisabled, setDisabled] = useState(false);
-  console.log(token);
   const handleReview = e => {
     e.preventDefault();
     const rating = e.target.rating.value;
@@ -20,47 +19,41 @@ function Review() {
       ratingDescription,
       username: user?.displayName,
       timestamp,
-      id:token,
-    }
-      // fetch(`http://localhost:5000/rooms/review/${token}`, {
-      //   method: 'PUT',
-      //   headers: {
-      //     'content-type': 'application/json',
-      //   },
-      //   body: JSON.stringify({ review }),
-      // })
-      //   .then(res => res.json())
-      //   .then(data => {
-      //     if (data.modifiedCount) {
-      //       Swal.fire({
-      //         icon: 'success',
-      //         title: 'Added Review Successfully',
-      //       });
-      //       e.target.reset();
-      //       setDisabled(true);
-      //       navigate('/my-bookings');
-      //     }
-    //   });
+      id: token,
+    };
 
-          fetch(`http://localhost:5000/rooms/review/${token}`, {
-            method: 'POST',
-            headers: {
-              'content-type': 'application/json',
-            },
-            body: JSON.stringify({ review }),
-          })
-            .then(res => res.json())
-            .then(data => {
-              console.log(data);
-                Swal.fire({
-                  icon: 'success',
-                  title: 'Added Review Successfully',
-                });
-                e.target.reset();
-                setDisabled(true);
-                navigate('/my-bookings');
-            });
+    fetch(`http://localhost:5000/rooms/review/${token}`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({ review }),
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.modifiedCount) {
+          console.log("updated review");
+          setDisabled(true);
+        }
+      });
 
+    fetch(`http://localhost:5000/rooms/review/${token}`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({ review }),
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        Swal.fire({
+          icon: 'success',
+          title: 'Added Review Successfully',
+        });
+        e.target.reset();
+        navigate('/my-bookings');
+      });
   };
   return (
     <div className="my-8 md:my-12">
