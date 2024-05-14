@@ -10,8 +10,7 @@ function UserReviews() {
 
   useEffect(() => {
     axios.get(`https://hotel-hive-server.vercel.app/review`).then(res => {
-      const sorted = res.data.sort((a, b) => b.timestamp - a.timestamp);
-      setReview(sorted);
+      setReview(res.data);
     });
   }, []);
 
