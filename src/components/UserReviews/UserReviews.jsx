@@ -10,27 +10,28 @@ function UserReviews() {
 
   useEffect(() => {
     axios.get(`https://hotel-hive-server.vercel.app/review`).then(res => {
-      setReview(res.data);
+      const sorted = res.data.sort((a, b) => b.timestamp - a.timestamp);
+      setReview(sorted);
     });
   }, []);
 
-useEffect(() => {
-  const handleResize = () => {
-    if (window.innerWidth < 640) {
-      setSlidesPerView(1);
-    } else if (window.innerWidth < 768) {
-      setSlidesPerView(2);
-    } else {
-      setSlidesPerView(3);
-    }
-  };
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setSlidesPerView(1);
+      } else if (window.innerWidth < 768) {
+        setSlidesPerView(2);
+      } else {
+        setSlidesPerView(3);
+      }
+    };
 
-  handleResize();
-  window.addEventListener('resize', handleResize);
-  return () => {
-    window.removeEventListener('resize', handleResize);
-  };
-}, []);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <div className="space-y-8 lg:space-y-12">
@@ -61,6 +62,7 @@ useEffect(() => {
               >
                 <p>Rating: {item.rating}</p>
                 <p>Description: {item.ratingDescription}</p> <hr />
+                <p>Timestamp: {item.timestamp}</p>
                 <p className="text-xs">{item.username}</p>
               </SwiperSlide>
             ))}
