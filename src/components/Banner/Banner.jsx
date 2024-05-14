@@ -1,4 +1,3 @@
-
 function Banner() {
   return (
     <div>
@@ -9,18 +8,15 @@ function Banner() {
           alt=""
         />
         <div className="absolute top-0 bg-gradient-to-r from-[#151515] to-[#15151500]  h-full w-full rounded-xl">
-          <div className="absolute top-[50%] mx-3 lg:left-20 max-w-lg transform -translate-y-[50%] space-y-4 ">
+          <div className="absolute top-[50%] mx-3 lg:left-20 max-w-xl transform -translate-y-[50%] space-y-4 ">
             <h2 className="text-2xl md:text-4xl font-semibold text-gray-200 text-center">
               Welcome to HotelHive <br />
-              <p className="text-center">
-                Your Gateway to Modern Hotel Booking!
-              </p>
+              <p className="text-center">Gateway to Hotel Booking!</p>
             </h2>
             <p className="text-gray-400 text-center text-sm md:text-base ">
               Discover a new way to book hotels with HotelHive. Experience
               seamless functionality across devices, innovative features, and
-              unparalleled user experiences. Join the hive and unlock a world of
-              effortless travel planning today!
+              join the hive to unlock effortless travel planning today!
             </p>
           </div>
         </div>
@@ -29,4 +25,4 @@ function Banner() {
   );
 }
 
-export default Banner
+export default Banner;

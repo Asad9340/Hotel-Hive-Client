@@ -4,6 +4,7 @@ import { Pagination, Navigation, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Rating } from '@material-tailwind/react';
 function UserReviews() {
   const [review, setReview] = useState([]);
   const [slidesPerView, setSlidesPerView] = useState(3);
@@ -59,7 +60,10 @@ function UserReviews() {
                 key={item._id}
                 className="p-5 border border-gray-300 bg-gray-100 rounded-lg space-y-3"
               >
-                <p>Rating: {item.rating}</p>
+                <p className='flex items-center gap-1'>
+                  Rating:
+                  <Rating className='text-xs' value={4} readonly />{item.rating}
+                </p>
                 <p>Description: {item.ratingDescription}</p> <hr />
                 <p>Timestamp: {item.timestamp}</p>
                 <p className="text-xs">{item.username}</p>
