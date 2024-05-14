@@ -13,7 +13,7 @@ function MyBookings() {
   const [control, setControl] = useState(false);
   useEffect(() => {
     axios
-      .get(`https://hotel-hive-server.vercel.app/my-booking?email=${email}`)
+      .get(`https://hotel-hive-server.vercel.app/my-booking?email=${email}`,{withCredentials:true})
       .then(res => {
         setMyBooking(res.data);
       });
