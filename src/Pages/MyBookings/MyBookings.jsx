@@ -31,7 +31,7 @@ function MyBookings() {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!',
+        confirmButtonText: 'Yes, Cancel Booking!',
       }).then(result => {
         if (result.isConfirmed) {
           let status = true;
@@ -53,8 +53,8 @@ function MyBookings() {
                     if (data.deletedCount > 0) {
                       setControl(!control);
                       Swal.fire({
-                        title: 'Deleted!',
-                        text: 'Your file has been deleted.',
+                        title: 'Canceled!',
+                        text: 'Your Booking has been canceled',
                         icon: 'success',
                       });
                     }
@@ -64,7 +64,6 @@ function MyBookings() {
         }
       });
     } else {
-      console.log('Sorry, the cancellation deadline has passed.');
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
