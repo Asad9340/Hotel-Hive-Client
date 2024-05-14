@@ -47,7 +47,7 @@ function ViewDetails() {
       html: `
               <br /> Title: ${room?.title} <br />
               Rating: ${room?.rating} <br />
-              Coast: ${room?.pricePerNight} <br />
+              Coast: ${room?.pricePerNight} tk per night <br />
               Area: ${room?.roomSize} <br />
               Expected Date: ${date}
   `,
@@ -110,7 +110,7 @@ function ViewDetails() {
         'Loading...'
       ) : (
         <>
-          <div className="mt-8 md:mt-12   grid gap-4 grid-cols-1 lg:grid-cols-12">
+          <div className="mt-8 md:mt-12 mx-2  grid lg:gap-6 grid-cols-1 lg:grid-cols-12">
             <div className="col-span-8 space-y-4">
               <div>
                 <h2 className="text-3xl font-semibold">{room.title}</h2>
@@ -120,7 +120,7 @@ function ViewDetails() {
                 <div className="relative">
                   <img
                     src={room.roomImage}
-                    className="rounded-lg w-full h-[400px] lg:h-[500px]"
+                    className="rounded-lg w-full h-[300px] md:h-[350px] lg:h-[450px]"
                     alt=""
                   />
                   <p className="absolute top-10 left-0 bg-[#008234] text-white rounded-r-lg font-semibold p-4 ">
@@ -130,37 +130,37 @@ function ViewDetails() {
               </div>
               <div className="space-y-3">
                 <p>
-                  Description: {room.roomDescription}
+                  <span className='font-semibold text-black'>Description:</span> {room.roomDescription}
                   {room.roomDescription}
                   {room.roomDescription}
                   {room.roomDescription}
-                  {room.roomDescription}
-                </p>
-                <p>
-                  <span className="bg-[#003B95] text-white p-2 rounded-t-md rounded-br-md">
-                    {room.rating}
-                    {'  '}
-                  </span>
                 </p>
               </div>
             </div>
-            <div className="col-span-4 pt-8 mt-8 md:mt-10 rounded-lg">
-              <div className="border w-full flex flex-col  items-center p-4 rounded-lg">
-                <h2 className="text-center text-xl font-semibold">
+            <div className="col-span-4 pt-8 mt-8 w-full md:mt-10 rounded-lg">
+              <div className="border border-gray-400 w-full flex flex-col  items-center p-4 rounded-lg">
+                <h2 className="text-center text-2xl font-semibold">
                   Property highlights
                 </h2>
-                <p className="flex gap-1 items-center text-base">
-                  Cost: <AiFillDollarCircle /> {room.pricePerNight} per Night
-                </p>
-                <p className="flex gap-1 items-center text-base">
-                  Room Size: {room.roomSize}
-                </p>
-                <p className="flex gap-1 items-center text-base">
-                  Room Availability:{' '}
-                  {room.availability ? 'Available' : 'Unavailable'}
-                </p>
+                <hr className="border px-4 my-2 w-full border-gray-500" />
+                <div>
+                  <p className="flex gap-1 items-end  text-lg font-semibold">
+                    Cost:{' '}
+                    <span className="text-3xl flex items-center font-extrabold lg:font-black">
+                      <AiFillDollarCircle /> {room.pricePerNight}
+                    </span>{' '}
+                    per Night
+                  </p>
+                  <p className="flex gap-1 items-center text-lg font-semibold">
+                    Room Size: {room.roomSize}
+                  </p>
+                  <p className="flex gap-1 items-center text-lg font-semibold">
+                    Room Availability:{' '}
+                    {room.availability ? 'Available' : 'Unavailable'}
+                  </p>
+                </div>
               </div>
-              <div className="mt-8 mx-2 md:mx-4 lg:mx-6">
+              <div className="mt-8 mx-3 md:mx-4 lg:mx-6">
                 <form onSubmit={handleBookNow} className="space-y-3">
                   <div>
                     <label htmlFor="text">Name: </label>
@@ -207,8 +207,8 @@ function ViewDetails() {
             </div>
           </div>
           <div>
-            <h2 className="text-2xl font-semibold">Reviews</h2>
-            <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-4">
+            <h2 className="text-2xl font-semibold mt-4 text-center md:text-start">Reviews</h2>
+            <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-4 mx-2">
               {review?.length ? (
                 review.map(item => (
                   <div
@@ -216,8 +216,9 @@ function ViewDetails() {
                     className="p-5 border border-gray-300 bg-gray-100 rounded-lg space-y-3"
                   >
                     <p>Rating: {item.rating}</p>
-                    <p>Description: {item.ratingDescription}</p> <hr />
-                    <p className="text-xs">{item.username}</p>
+                    <p>Description: {item.ratingDescription}</p> <hr className='border border-gray-400'/>
+                    <p className="text-md">{item.username}</p>
+                    <small>Customer</small>
                   </div>
                 ))
               ) : (

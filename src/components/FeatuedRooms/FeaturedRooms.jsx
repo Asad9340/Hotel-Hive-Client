@@ -25,7 +25,7 @@ function FeaturedRooms() {
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8 p-2 md:gap-4  rounded-lg">
           {featuredRoom.map(room => (
-            <div key={room._id} className='h-full'>
+            <div key={room._id} className="h-full">
               <div className="space-y-2 my-2 h-full flex flex-col justify-between border border-gray-400 p-3 md:p-4 rounded-lg">
                 <div className="relative">
                   <Link to={`/rooms/${room._id}`} className="cursor-pointer">
@@ -73,9 +73,9 @@ function FeaturedRooms() {
                   <h3 className="text-lg font-semibold">
                     Price:{' '}
                     <span className="text-3xl font-extrabold">
-                      {room?.pricePerNight}
+                      {room?.pricePerNight} tk
                     </span>{' '}
-                    tk Per Night
+                    <span className='text-sm'>Per Night</span>
                   </h3>
                 </div>
                 <Link to={`/rooms/${room._id}`}>
