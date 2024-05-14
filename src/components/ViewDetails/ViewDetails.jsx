@@ -14,7 +14,7 @@ function ViewDetails() {
   const [review, setReview] = useState([]);
 
   useEffect(() => {
-    axios.get(`https://hotel-hive-server.vercel.app/rooms/${id}`,{withCredentials:true}).then(res => {
+    axios.get(`https://hotel-hive-server.vercel.app/rooms/${id}`).then(res => {
       setRoom(res.data);
     });
   }, [id, control]);
@@ -84,7 +84,7 @@ function ViewDetails() {
               'content-type': 'application/json',
             },
             body: JSON.stringify({ status }),
-          },{Credential:'include'}
+          }
         )
           .then(res => res.json())
           .then(data => {
@@ -96,11 +96,10 @@ function ViewDetails() {
     });
   };
   useEffect(() => {
-    axios.get(`https://hotel-hive-server.vercel.app/review/${id}`,{withCredentials:true}).then(res => {
+    axios.get(`https://hotel-hive-server.vercel.app/review/${id}`).then(res => {
       setReview(res.data);
     });
   }, [id]);
-  console.log(review);
 
   return (
     <div>

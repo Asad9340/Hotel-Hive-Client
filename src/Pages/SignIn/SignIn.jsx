@@ -6,6 +6,7 @@ import { EyeSlashIcon, EyeIcon } from '@heroicons/react/24/solid';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { AuthContext } from '../../Firebase/AuthProvider';
+import axios from 'axios';
 
 export function SignIn() {
   const [error, setError] = useState('');

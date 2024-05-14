@@ -11,9 +11,7 @@ function Rooms() {
   const [rooms, setRooms] = useState([]);
   useEffect(() => {
     axios
-      .get(`https://hotel-hive-server.vercel.app/rooms`, {
-        withCredentials: true,
-      })
+      .get(`https://hotel-hive-server.vercel.app/rooms`)
       .then(res => {
         setRooms(res.data);
       });
@@ -21,9 +19,7 @@ function Rooms() {
 
   const handleAllFilter = () => {
     axios
-      .get(`https://hotel-hive-server.vercel.app/rooms`, {
-        withCredentials: true,
-      })
+      .get(`https://hotel-hive-server.vercel.app/rooms`)
       .then(res => {
         setRooms(res.data);
       });
@@ -34,8 +30,7 @@ function Rooms() {
     (async () => {
       axios
         .get(
-          `https://hotel-hive-server.vercel.app/room/${lowValue}/${highValue}`,
-          { withCredentials: true }
+          `https://hotel-hive-server.vercel.app/room/${lowValue}/${highValue}`
         )
         .then(res => {
           setRooms(res.data);
@@ -49,8 +44,7 @@ function Rooms() {
     (async () => {
       axios
         .get(
-          `https://hotel-hive-server.vercel.app/room/${lowValue}/${highValue}`,
-          { withCredentials: true }
+          `https://hotel-hive-server.vercel.app/room/${lowValue}/${highValue}`
         )
         .then(res => {
           setRooms(res.data);
@@ -63,8 +57,7 @@ function Rooms() {
     (async () => {
       axios
         .get(
-          `https://hotel-hive-server.vercel.app/room/${lowValue}/${highValue}`,
-          { withCredentials: true }
+          `https://hotel-hive-server.vercel.app/room/${lowValue}/${highValue}`
         )
         .then(res => {
           setRooms(res.data);

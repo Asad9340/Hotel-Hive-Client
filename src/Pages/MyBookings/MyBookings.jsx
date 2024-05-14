@@ -13,7 +13,9 @@ function MyBookings() {
   const [control, setControl] = useState(false);
   useEffect(() => {
     axios
-      .get(`https://hotel-hive-server.vercel.app/my-booking?email=${email}`)
+      .get(`https://hotel-hive-server.vercel.app/my-booking?email=${email}`, {
+        withCredentials: true,
+      })
       .then(res => {
         setMyBooking(res.data);
       });
@@ -24,53 +26,45 @@ function MyBookings() {
     const cancellationDeadline = bookedDate.clone().subtract(1, 'day');
     const currentDate = moment();
     if (currentDate.isBefore(cancellationDeadline, 'day')) {
-      console.log(
-        Swal.fire({
-          title: 'Are you sure?',
-          text: "You won't be able to revert this!",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, delete it!',
-        }).then(result => {
-          if (result.isConfirmed) {
-            let status = true;
-            fetch(
-              `https://hotel-hive-server.vercel.app/rooms/update/${token}`,
-              {
-                method: 'PUT',
-                headers: {
-                  'content-type': 'application/json',
-                },
-                body: JSON.stringify({ status }),
-              }
-            )
-              .then(res => res.json())
-              .then(data => {
-                if (data.modifiedCount) {
-                  fetch(
-                    `https://hotel-hive-server.vercel.app/my-booking/${id}`,
-                    {
-                      method: 'DELETE',
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!',
+      }).then(result => {
+        if (result.isConfirmed) {
+          let status = true;
+          fetch(`https://hotel-hive-server.vercel.app/rooms/update/${token}`, {
+            method: 'PUT',
+            headers: {
+              'content-type': 'application/json',
+            },
+            body: JSON.stringify({ status }),
+          })
+            .then(res => res.json())
+            .then(data => {
+              if (data.modifiedCount) {
+                fetch(`https://hotel-hive-server.vercel.app/my-booking/${id}`, {
+                  method: 'DELETE',
+                })
+                  .then(res => res.json())
+                  .then(data => {
+                    if (data.deletedCount > 0) {
+                      setControl(!control);
+                      Swal.fire({
+                        title: 'Deleted!',
+                        text: 'Your file has been deleted.',
+                        icon: 'success',
+                      });
                     }
-                  )
-                    .then(res => res.json())
-                    .then(data => {
-                      if (data.deletedCount > 0) {
-                        setControl(!control);
-                        Swal.fire({
-                          title: 'Deleted!',
-                          text: 'Your file has been deleted.',
-                          icon: 'success',
-                        });
-                      }
-                    });
-                }
-              });
-          }
-        })
-      );
+                  });
+              }
+            });
+        }
+      });
     } else {
       console.log('Sorry, the cancellation deadline has passed.');
       Swal.fire({

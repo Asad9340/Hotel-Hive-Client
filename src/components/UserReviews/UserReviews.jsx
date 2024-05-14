@@ -6,11 +6,32 @@ import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 function UserReviews() {
   const [review, setReview] = useState([]);
+  const [slidesPerView, setSlidesPerView] = useState(3);
+
   useEffect(() => {
-    axios.get(`https://hotel-hive-server.vercel.app/review`,{withCredentials:true}).then(res => {
+    axios.get(`https://hotel-hive-server.vercel.app/review`).then(res => {
       setReview(res.data);
     });
   }, []);
+
+useEffect(() => {
+  const handleResize = () => {
+    if (window.innerWidth < 640) {
+      setSlidesPerView(1);
+    } else if (window.innerWidth < 768) {
+      setSlidesPerView(2);
+    } else {
+      setSlidesPerView(3);
+    }
+  };
+
+  handleResize();
+  window.addEventListener('resize', handleResize);
+  return () => {
+    window.removeEventListener('resize', handleResize);
+  };
+}, []);
+
   return (
     <div className="space-y-8 lg:space-y-12">
       <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold md:font-bold lg:font-extrabold text-center">
@@ -19,7 +40,7 @@ function UserReviews() {
       <div>
         {review?.length ? (
           <Swiper
-            slidesPerView={3}
+            slidesPerView={slidesPerView}
             spaceBetween={30}
             centeredSlides={true}
             autoplay={{
