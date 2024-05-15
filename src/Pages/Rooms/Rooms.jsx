@@ -5,24 +5,21 @@ import { Option, Select } from '@material-tailwind/react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { Helmet } from 'react-helmet';
+import Spinner from '../../components/Spinner/Spinner';
 AOS.init();
 
 function Rooms() {
   const [rooms, setRooms] = useState([]);
   useEffect(() => {
-    axios
-      .get(`https://hotel-hive-server.vercel.app/rooms`)
-      .then(res => {
-        setRooms(res.data);
-      });
+    axios.get(`https://hotel-hive-server.vercel.app/rooms`).then(res => {
+      setRooms(res.data);
+    });
   }, []);
 
   const handleAllFilter = () => {
-    axios
-      .get(`https://hotel-hive-server.vercel.app/rooms`)
-      .then(res => {
-        setRooms(res.data);
-      });
+    axios.get(`https://hotel-hive-server.vercel.app/rooms`).then(res => {
+      setRooms(res.data);
+    });
   };
   const handleLowFilter = () => {
     const lowValue = 0;
@@ -66,94 +63,100 @@ function Rooms() {
   };
 
   return (
-    <div className="mt-8 space-y-3 ">
-      <Helmet>
-        <title>Rooms</title>
-      </Helmet>
-      <h2 className="text-center text-3xl font-semibold">
-        Available Rooms: {rooms?.length}
-      </h2>
-      <div className="w-full px-4">
-        <label
-          className="  block  text-blueGray-600 text-lg font-bold mb-2"
-          htmlFor="grid-password"
-        >
-          Filter By Price
-        </label>
-        <Select label="Select Filter Option">
-          <Option onClick={handleAllFilter}>All</Option>
-          <Option onClick={handleLowFilter}>Price 0 to 2000</Option>
-          <Option onClick={handleMidFilter}>Price 2001 to 5000</Option>
-          <Option onClick={handleHighFilter}>Price 5001 to Max</Option>
-        </Select>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 p-4  rounded-lg">
-        {rooms.map(room => (
-          <div
-            key={room._id}
-            className="border border-gray-500 hover:border-[#df9d5b] p-3 rounded-md hover:scale-105 duration-300"
-          >
-            <div>
-              <div className="relative">
-                <Link to={`/rooms/${room._id}`} className="cursor-pointer">
-                  <img
-                    className="rounded-lg w-full h-[250px]"
-                    src={room?.roomImage}
-                    alt=""
-                  />
-                </Link>
-                <p className="absolute top-8 left-0 z-50 bg-[#F57C00] px-3 py-1 rounded-full text-white -rotate-45">
-                  {room.availability ? 'Available' : 'Unavailable'}
-                </p>
-              </div>
-              <h2 data-aos="fade-up" className="text-xl font-semibold mt-2">
-                {room.title}
-              </h2>
-              <p data-aos="fade-up" className="text-sm mb-3">
-                Hotel in Dhaka
-              </p>{' '}
-              <hr className="border border-gray-300 mb-3" />
-              <div className="flex justify-between gap-2">
-                <div className="flex gap-2 my-2">
-                  <p>
-                    <span
-                      data-aos="fade-up"
-                      className="bg-[#003B95] text-white p-2 rounded-t-md rounded-br-md"
-                    >
-                      {room.rating}
-                    </span>
-                  </p>
-                  <p data-aos="fade-up" className="font-semibold">
-                    {room.rating > 4.6
-                      ? 'Wonderful'
-                      : room.rating > 4.4
-                      ? 'Very Good'
-                      : 'Bad'}
-                  </p>
-                </div>
-                <div>
-                  <p
-                    data-aos="fade-up"
-                    className="mt-4 font-semibold underline"
-                  >
-                    {room?.reviews?.length} Reviews
-                  </p>
-                </div>
-              </div>
-              <div className="pb-3">
-                <h3 data-aos="fade-up" className="text-lg font-semibold">
-                  Price:{' '}
-                  <span className="text-3xl font-extrabold">
-                    {room?.pricePerNight} tk
-                  </span>{' '}
-                  <span className="text-sm">Per Night</span>
-                </h3>
-              </div>
-            </div>
+    <>
+      {rooms ? (
+        <div className="mt-8 space-y-3 ">
+          <Helmet>
+            <title>Rooms</title>
+          </Helmet>
+          <h2 className="text-center text-3xl font-semibold">
+            Available Rooms: {rooms?.length}
+          </h2>
+          <div className="w-full px-4">
+            <label
+              className="  block  text-blueGray-600 text-lg font-bold mb-2"
+              htmlFor="grid-password"
+            >
+              Filter By Price
+            </label>
+            <Select label="Select Filter Option">
+              <Option onClick={handleAllFilter}>All</Option>
+              <Option onClick={handleLowFilter}>Price 0 to 2000</Option>
+              <Option onClick={handleMidFilter}>Price 2001 to 5000</Option>
+              <Option onClick={handleHighFilter}>Price 5001 to Max</Option>
+            </Select>
           </div>
-        ))}
-      </div>
-    </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 p-4  rounded-lg">
+            {rooms.map(room => (
+              <div
+                key={room._id}
+                className="border border-gray-500 hover:border-[#df9d5b] p-3 rounded-md hover:scale-105 duration-300"
+              >
+                <div>
+                  <div className="relative">
+                    <Link to={`/rooms/${room._id}`} className="cursor-pointer">
+                      <img
+                        className="rounded-lg w-full h-[250px]"
+                        src={room?.roomImage}
+                        alt=""
+                      />
+                    </Link>
+                    <p className="absolute top-8 left-0 z-50 bg-[#F57C00] px-3 py-1 rounded-full text-white -rotate-45">
+                      {room.availability ? 'Available' : 'Unavailable'}
+                    </p>
+                  </div>
+                  <h2 data-aos="fade-up" className="text-xl font-semibold mt-2">
+                    {room.title}
+                  </h2>
+                  <p data-aos="fade-up" className="text-sm mb-3">
+                    Hotel in Dhaka
+                  </p>{' '}
+                  <hr className="border border-gray-300 mb-3" />
+                  <div className="flex justify-between gap-2">
+                    <div className="flex gap-2 my-2">
+                      <p>
+                        <span
+                          data-aos="fade-up"
+                          className="bg-[#003B95] text-white p-2 rounded-t-md rounded-br-md"
+                        >
+                          {room.rating}
+                        </span>
+                      </p>
+                      <p data-aos="fade-up" className="font-semibold">
+                        {room.rating > 4.6
+                          ? 'Wonderful'
+                          : room.rating > 4.4
+                          ? 'Very Good'
+                          : 'Bad'}
+                      </p>
+                    </div>
+                    <div>
+                      <p
+                        data-aos="fade-up"
+                        className="mt-4 font-semibold underline"
+                      >
+                        {room?.reviews?.length} Reviews
+                      </p>
+                    </div>
+                  </div>
+                  <div className="pb-3">
+                    <h3 data-aos="fade-up" className="text-lg font-semibold">
+                      Price:{' '}
+                      <span className="text-3xl font-extrabold">
+                        {room?.pricePerNight} tk
+                      </span>{' '}
+                      <span className="text-sm">Per Night</span>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <Spinner />
+      )}
+    </>
   );
 }
 

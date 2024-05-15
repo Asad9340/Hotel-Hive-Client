@@ -5,6 +5,7 @@ import { AiFillDollarCircle } from 'react-icons/ai';
 import { AuthContext } from './../../Firebase/AuthProvider';
 import Swal from 'sweetalert2';
 import { Helmet } from 'react-helmet';
+import Spinner from '../Spinner/Spinner';
 function ViewDetails() {
   const { user, loading } = useContext(AuthContext);
   const { id } = useParams();
@@ -107,7 +108,7 @@ function ViewDetails() {
         <title>View Details</title>
       </Helmet>
       {loading ? (
-        'Loading...'
+        <Spinner/>
       ) : (
         <>
           <div className="mt-8 md:mt-12 mx-2  grid lg:gap-6 grid-cols-1 lg:grid-cols-12">
