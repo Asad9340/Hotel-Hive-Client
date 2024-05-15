@@ -73,7 +73,7 @@ function Rooms() {
       <h2 className="text-center text-3xl font-semibold">
         Available Rooms: {rooms?.length}
       </h2>
-      <div className="w-full">
+      <div className="w-full px-4">
         <label
           className="  block  text-blueGray-600 text-lg font-bold mb-2"
           htmlFor="grid-password"
@@ -134,7 +134,7 @@ function Rooms() {
                 <div>
                   <p
                     data-aos="fade-up"
-                    className="mt-4 font-semibold hover:underline"
+                    className="mt-4 font-semibold underline"
                   >
                     {room?.reviews?.length} Reviews
                   </p>
