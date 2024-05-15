@@ -69,8 +69,8 @@ function Rooms() {
           <Helmet>
             <title>Rooms</title>
           </Helmet>
-          <h2 className="text-center text-3xl font-semibold">
-            Available Rooms: {rooms?.length}
+          <h2 className="text-center text-3xl md:text-4xl lg:text-5xl font-semibold lg:font-bold font-lato">
+            Available Rooms
           </h2>
           <div className="w-full px-4">
             <label
@@ -135,7 +135,8 @@ function Rooms() {
                         data-aos="fade-up"
                         className="mt-4 font-semibold underline"
                       >
-                        {room?.reviews?.length} Reviews
+                        {room?.reviews?.length}{' '}
+                        {room?.reviews?.length == 0 || room?.reviews?.length==1? 'Review' : "Reviews"}
                       </p>
                     </div>
                   </div>
