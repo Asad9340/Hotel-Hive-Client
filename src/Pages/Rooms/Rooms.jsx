@@ -87,9 +87,12 @@ function Rooms() {
           <Option onClick={handleHighFilter}>Price 5001 to Max</Option>
         </Select>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4  rounded-lg">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 p-4  rounded-lg">
         {rooms.map(room => (
-          <div key={room._id}>
+          <div
+            key={room._id}
+            className="border hover:border-[#df9d5b] p-3 rounded-md hover:scale-105 duration-300"
+          >
             <div>
               <div className="relative">
                 <Link to={`/rooms/${room._id}`} className="cursor-pointer">
@@ -103,31 +106,46 @@ function Rooms() {
                   {room.availability ? 'Available' : 'Unavailable'}
                 </p>
               </div>
-              <h2 data-aos="fade-up" className="text-xl font-semibold">
+              <h2 data-aos="fade-up" className="text-xl font-semibold mt-2">
                 {room.title}
               </h2>
               <p data-aos="fade-down" className="text-sm mb-3">
                 Hotel in Dhaka
-              </p>
-              <div className="flex items-center gap-2">
-                <p>
-                  <span
-                    data-aos="fade-up"
-                    className="bg-[#003B95] text-white p-2 rounded-t-md rounded-br-md"
-                  >
-                    {room.rating}
-                    {'  '}
-                  </span>
-                </p>
-                <p data-aos="fade-up">
-                  {room.rating > 4.6
-                    ? 'Wonderful'
-                    : room.rating > 4.4
-                    ? 'Very Good'
-                    : 'Bad'}
-                </p>
+              </p>{' '}
+              <hr className="border border-gray-300 mb-3" />
+              <div className="flex justify-between gap-2">
+                <div className="flex gap-2 my-2">
+                  <p>
+                    <span
+                      data-aos="fade-up"
+                      className="bg-[#003B95] text-white p-2 rounded-t-md rounded-br-md"
+                    >
+                      {room.rating}
+                    </span>
+                  </p>
+                  <p data-aos="fade-up" className="font-semibold">
+                    {room.rating > 4.6
+                      ? 'Wonderful'
+                      : room.rating > 4.4
+                      ? 'Very Good'
+                      : 'Bad'}
+                  </p>
+                </div>
+                <div>
+                  <p className="mt-4 font-semibold hover:underline">
+                    {room?.reviews?.length} Reviews
+                  </p>
+                </div>
               </div>
-              <p className="mt-4">{room?.reviews?.length} Reviews</p>
+              <div className="pb-3">
+                <h3 className="text-lg font-semibold">
+                  Price:{' '}
+                  <span className="text-3xl font-extrabold">
+                    {room?.pricePerNight} tk
+                  </span>{' '}
+                  <span className="text-sm">Per Night</span>
+                </h3>
+              </div>
             </div>
           </div>
         ))}
