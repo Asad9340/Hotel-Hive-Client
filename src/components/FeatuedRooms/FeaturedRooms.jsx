@@ -42,7 +42,7 @@ function FeaturedRooms() {
                 <h2 data-aos="fade-up" className="text-xl font-semibold">
                   {room.title}
                 </h2>
-                <p data-aos="fade-down" className="text-sm mb-2">
+                <p data-aos="fade-up" className="text-sm mb-2">
                   Hotel in Dhaka
                 </p>
                 <div className="flex justify-between gap-2">
@@ -64,22 +64,29 @@ function FeaturedRooms() {
                     </p>
                   </div>
                   <div>
-                    <p className="mt-4 font-semibold hover:underline">
+                    <p
+                      data-aos="fade-up"
+                      className="mt-4 font-semibold hover:underline"
+                    >
                       {room?.reviews?.length} Reviews
                     </p>
                   </div>
                 </div>
                 <div className="pb-3">
-                  <h3 className="text-lg font-semibold">
+                  <h3 data-aos="fade-up" className="text-lg font-semibold">
                     Price:{' '}
                     <span className="text-3xl font-extrabold">
                       {room?.pricePerNight} tk
                     </span>{' '}
-                    <span className='text-sm'>Per Night</span>
+                    <span className="text-sm">Per Night</span>
                   </h3>
                 </div>
                 <Link to={`/rooms/${room._id}`}>
-                  <Button className="w-full cursor-pointer" color="green">
+                  <Button
+                    data-aos="fade-up"
+                    className="w-full cursor-pointer"
+                    color="green"
+                  >
                     Book Now
                   </Button>
                 </Link>
