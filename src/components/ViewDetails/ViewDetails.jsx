@@ -15,7 +15,7 @@ function ViewDetails() {
   const [review, setReview] = useState([]);
 
   useEffect(() => {
-    axios.get(`https://hotel-hive-server.vercel.app/rooms/${id}`).then(res => {
+    axios.get(`https://hotel-hive-server.vercel.app/rooms/${id}`, {withCredentials:true}).then(res => {
       setRoom(res.data);
     });
   }, [id, control]);
