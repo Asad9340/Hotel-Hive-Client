@@ -9,6 +9,7 @@ import Spinner from '../../components/Spinner/Spinner';
 AOS.init();
 
 function Rooms() {
+  const [selectedOption, setSelectedOption] = useState('');
   const [rooms, setRooms] = useState([]);
   useEffect(() => {
     axios.get(`https://hotel-hive-server.vercel.app/rooms`).then(res => {
@@ -62,6 +63,29 @@ function Rooms() {
     })();
   };
 
+  const handleChange = event => {
+    console.log(event.target);
+    setSelectedOption(event.target.value);
+    if (event.target.value === 'availability') {
+      const sortAvailability = rooms.sort((a, b) => {
+        if (a.availability < b.availability) {
+          return 1;
+        }
+        if (a.availability > b.availability) {
+          return -1;
+        }
+        return 0;
+      });
+      setRooms(sortAvailability);
+    } else if (event.target.value === 'price') {
+      const sortPrice = rooms.sort((a, b) => b.price - a.price);
+      setRooms(sortPrice);
+    } else if (event.target.value === 'rating') {
+      const sortRating = rooms.sort((a, b) => b.rating - a.rating);
+      setRooms(sortRating);
+    }
+  };
+
   return (
     <>
       {rooms ? (
@@ -72,19 +96,41 @@ function Rooms() {
           <h2 className="text-center text-3xl md:text-4xl lg:text-5xl font-semibold lg:font-bold font-lato">
             Available Rooms
           </h2>
-          <div className="w-full px-4">
-            <label
-              className="  block  text-blueGray-600 text-lg font-bold mb-2"
-              htmlFor="grid-password"
-            >
-              Filter By Price
-            </label>
-            <Select label="Select Filter Option">
-              <Option onClick={handleAllFilter}>All</Option>
-              <Option onClick={handleLowFilter}>Price 0 to 2000</Option>
-              <Option onClick={handleMidFilter}>Price 2001 to 5000</Option>
-              <Option onClick={handleHighFilter}>Price 5001 to Max</Option>
-            </Select>
+          <div className="grid gap-6 grid-cols-1 md:grid-cols-2">
+            <div className="w-full px-4">
+              <label
+                className="  block  text-blueGray-600 text-lg font-bold mb-2"
+                htmlFor="grid-password"
+              >
+                Filter By Price
+              </label>
+              <Select label="Select Filter Option">
+                <Option onClick={handleAllFilter}>All</Option>
+                <Option onClick={handleLowFilter}>Price 0 to 2000</Option>
+                <Option onClick={handleMidFilter}>Price 2001 to 5000</Option>
+                <Option onClick={handleHighFilter}>Price 5001 to Max</Option>
+              </Select>
+            </div>
+            <div className="w-full px-4">
+              <label
+                className="  block  text-blueGray-600 text-lg font-bold mb-2"
+                htmlFor="grid-password"
+              >
+                Sort By
+              </label>
+              <select
+                value={selectedOption}
+                onChange={handleChange}
+                className="border px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                name="subcategory_name"
+                id=""
+              >
+                <option value="">Select an option</option>
+                <option value="availability">Availability</option>
+                <option value="rating">Rating</option>
+                <option value="price">Price</option>
+              </select>
+            </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 p-4  rounded-lg">
             {rooms.map(room => (
@@ -136,7 +182,10 @@ function Rooms() {
                         className="mt-4 font-semibold underline"
                       >
                         {room?.reviews?.length}{' '}
-                        {room?.reviews?.length == 0 || room?.reviews?.length==1? 'Review' : "Reviews"}
+                        {room?.reviews?.length == 0 ||
+                        room?.reviews?.length == 1
+                          ? 'Review'
+                          : 'Reviews'}
                       </p>
                     </div>
                   </div>
