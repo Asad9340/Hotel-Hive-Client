@@ -22,6 +22,6 @@ Hotel Hive is a website that provides a seamless experience for booking hotel ro
 
 
 ##For clone this project
-Make copy of this repo: `git clone https://github.com/Asad9340/Hotel-Hive-Client.git`
-Install package: `npm install`
+Make copy of this repo: `git clone https://github.com/Asad9340/Hotel-Hive-Client.git`  <br />
+Install package: `npm install`  <br />
 Run project: `npm run dev`
