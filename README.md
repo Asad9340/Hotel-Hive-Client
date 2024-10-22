@@ -2,7 +2,6 @@
 
 Live site: [Hotel Hive](https://hotel-hive9340.web.app/)
 
-## Assignment_Category_0004
 
 Hotel Hive is a website that provides a seamless experience for booking hotel rooms and managing bookings. Here are some key features of the website:
 
